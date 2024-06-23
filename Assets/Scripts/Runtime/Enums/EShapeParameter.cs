@@ -2,12 +2,12 @@
 {
     public enum EShapeParameter
     {
-        None,
-        Length,
         Width,
         Height,
+        Depth,
         Radius,
-        SideCount,
-        Color,
+        LongitudeSegments,
+        LatitudeSegments
     }
+
 }
