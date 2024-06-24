@@ -12,25 +12,26 @@ namespace Runtime.Logic
         private GameObject _shapeGO;
         private ShapePresenter currentPresenter;
         public ShapePresenter CurrentShape => currentPresenter;
+
+        private Material standardMaterial;
+        private Material wireframeMaterial;
+        private bool _isWireframeMode;
         
         private void Start()
         {
             _shapeGO = new GameObject("Shape");
             _shapeGO.AddComponent<MeshFilter>();
-            var meshRenderer = _shapeGO.AddComponent<MeshRenderer>();
+            _shapeGO.AddComponent<MeshRenderer>();
             
-            var urpLitShader = Shader.Find("Universal Render Pipeline/Lit");
-            if (urpLitShader != null)
-            {
-                meshRenderer.material = new Material(urpLitShader);
-            }
-            else
-            {
-                Debug.LogError("URP Lit Shader not found");
-            }
+            var baseShader = Shader.Find("Standard");
+            var wireframeShader = Shader.Find("Unlit/WireframeShader");
+            
+            standardMaterial = new Material(baseShader);
+            wireframeMaterial = new Material(wireframeShader);
 
             _shapeGO.transform.position = Vector3.zero;
             SetShape(EShapeType.Parallelepiped);
+            ChangeShaderMode();
         }
 
         public void SetShape(EShapeType type)
@@ -51,6 +52,13 @@ namespace Runtime.Logic
             currentPresenter.View.transform.rotation = Quaternion.identity;
         }
 
+        public void ChangeShaderMode()
+        {
+            currentPresenter.SetMaterial(_isWireframeMode ? wireframeMaterial : standardMaterial);
+
+            _isWireframeMode = !_isWireframeMode;
+        }
+        
         public void RotateCurrentShape(Vector2 rotationInput, float rotationSpeed)
         {
             if (currentPresenter != null && currentPresenter.View != null)

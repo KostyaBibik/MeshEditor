@@ -7,6 +7,7 @@ namespace UI.SelectShapeWindow
     public class SelectShapeModel
     {
         public SelectorInformation[] SelectorElements;
+        public Action changeShaderModeCallback;
     }
 
     public class SelectorInformation

@@ -19,6 +19,14 @@ namespace Runtime.ShapeComponents
             meshFilter.mesh = mesh;
         }
 
+        public void SetMaterial(Material material)
+        {
+            if (meshRenderer != null)
+            {
+                meshRenderer.material = material;
+            }
+        }
+
         public void SetColor(Color color)
         {
             if (meshRenderer != null)

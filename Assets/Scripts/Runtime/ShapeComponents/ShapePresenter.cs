@@ -24,6 +24,11 @@ namespace Runtime.ShapeComponents
             UpdateView();
         }
 
+        public void SetMaterial(Material material)
+        {
+            View.SetMaterial(material);
+        }
+        
         public void SetColor(Color color)
         {
             View.SetColor(color);

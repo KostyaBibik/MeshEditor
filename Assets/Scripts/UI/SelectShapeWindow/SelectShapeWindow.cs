@@ -1,16 +1,24 @@
 ﻿using System.Linq;
+using UIKit.Elements;
+using UIKit.Elements.Models;
 using UISystem;
 
 namespace UI.SelectShapeWindow
 {
     public class SelectShapeWindow : UIWindow<SelectShapeModel>
     {
+        [AutoSetupField] private ButtonView _changeShaderMode;
+        
         private SelectShapeElementView[] _lines;
         
         protected override void UpdateView(SelectShapeModel model)
         {
             UpdateItemsCount(model.SelectorElements.Length);
             UpdateContent(model.SelectorElements);
+
+            var btnModel = new ButtonModel();
+            btnModel.ClickCallback = model.changeShaderModeCallback;
+            _changeShaderMode.InvokeUpdateView(btnModel);
         }
 
         private void UpdateItemsCount(int count)
