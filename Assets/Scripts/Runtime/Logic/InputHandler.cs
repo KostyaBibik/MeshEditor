@@ -1,5 +1,4 @@
 ﻿using Runtime.Enums;
-using Runtime.ShapeComponents.Impl;
 using UnityEngine;
 
 namespace Runtime.Logic
@@ -44,17 +43,34 @@ namespace Runtime.Logic
             else if (Input.GetKeyDown(KeyCode.Alpha6))
             {
                 ChangeShapeParameter(EShapeParameter.Radius, .5f);
-            }
-            else if (Input.GetKeyDown(KeyCode.Space))
+            } 
+            else if (Input.GetKeyDown(KeyCode.Alpha7))
             {
-                _test = !_test;
-                _shapeManager.SetShape(_test 
-                    ? typeof(Sphere)
-                    : typeof(Parallelepiped));
+                ChangeShapeParameter(EShapeParameter.Segments, 1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                ChangeShapeParameter(EShapeParameter.Sides, 1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
+                _shapeManager.SetShape(EShapeType.Sphere);
+            }
+            else if (Input.GetKeyDown(KeyCode.W))
+            {
+                _shapeManager.SetShape(EShapeType.Prism);
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                _shapeManager.SetShape(EShapeType.Parallelepiped);
+            }
+            else if (Input.GetKeyDown(KeyCode.R))
+            {
+                _shapeManager.SetShape(EShapeType.Capsule);
             }
         }
 
-        private void ChangeShapeParameter(EShapeParameter parameter, float delta)
+        private void ChangeShapeParameter<T>(EShapeParameter parameter, T delta) where T : struct
         {
             _shapeManager.CurrentShape.ChangeParameterValue(parameter, delta);
         }

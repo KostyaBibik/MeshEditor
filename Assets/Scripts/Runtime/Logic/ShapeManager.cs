@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Runtime.Enums;
+using Runtime.Infrastructure.Factory.Impl;
 using Runtime.ShapeComponents;
-using Runtime.ShapeComponents.Impl;
 using UnityEngine;
 
 namespace Runtime.Logic
@@ -8,15 +8,14 @@ namespace Runtime.Logic
     public class ShapeManager : MonoBehaviour
     {
         private GameObject _shapeGO;
-        private Shape currentShape;
-        public Shape CurrentShape => currentShape;
+        private ShapePresenter currentPresenter;
+        public ShapePresenter CurrentShape => currentPresenter;
         
         private void Start()
         {
             _shapeGO = new GameObject("Shape");
             _shapeGO.AddComponent<MeshFilter>();
             var meshRenderer = _shapeGO.AddComponent<MeshRenderer>();
-            currentShape = _shapeGO.AddComponent<Parallelepiped>();
             
             var urpLitShader = Shader.Find("Universal Render Pipeline/Lit");
             if (urpLitShader != null)
@@ -27,23 +26,27 @@ namespace Runtime.Logic
             {
                 Debug.LogError("URP Lit Shader not found");
             }
-            
-            currentShape.transform.position = Vector3.zero;
+
+            _shapeGO.transform.position = Vector3.zero;
+            SetShape(EShapeType.Parallelepiped);
         }
 
-        public void SetShape(Type shapeType)
+        public void SetShape(EShapeType type)
         {
-            Destroy(currentShape);
-            currentShape = (Shape)_shapeGO.AddComponent(shapeType);
+            if (currentPresenter != null && currentPresenter.View != null)
+            {
+                Destroy(currentPresenter.View);
+            }
+            
+            currentPresenter = ShapePresenterFactory.CreatePresenter(type, _shapeGO);
+
+            currentPresenter.UpdateView();
         }
 
 
         public void SetColor(Color newColor)
         {
-            if (currentShape != null)
-            {
-                currentShape.SetColor(newColor);
-            }
+            currentPresenter?.SetColor(newColor);
         }
     }
 }

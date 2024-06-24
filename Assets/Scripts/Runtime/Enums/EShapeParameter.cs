@@ -7,7 +7,9 @@
         Depth,
         Radius,
         LongitudeSegments,
-        LatitudeSegments
+        LatitudeSegments,
+        Segments,
+        Sides,
     }
 
 }
