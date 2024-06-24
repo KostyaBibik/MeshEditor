@@ -73,6 +73,7 @@ namespace UI.ParametersWindow
                 isWholeValue = info.Value is IShapeParameter<int>
             }).ToArray();
             _parametersWindow.InvokeUpdateView(model);
+            _parametersWindow.BeginShow();
         }
     }
 }

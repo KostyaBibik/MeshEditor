@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 261197660}
   - component: {fileID: 261197661}
-  - component: {fileID: 261197662}
   - component: {fileID: 261197663}
   - component: {fileID: 261197664}
   m_Layer: 0
@@ -168,18 +167,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 472dd120a56744dbaf0b0f10f750e155, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &261197662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261197658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 608c8c21e12e41baa8247eadafeadfee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &261197663
@@ -226,10 +213,10 @@ MonoBehaviour:
       m_NumColorKeys: 3
       m_NumAlphaKeys: 2
   initSelectShapeWindow:
-    sphereIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-    prismIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-    parallelepipedIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-    capsuleIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    sphereIcon: {fileID: 21300000, guid: c46752455b77a5d47b5e1fdb7b38d673, type: 3}
+    prismIcon: {fileID: 21300000, guid: 2aa945edb34442143bdb0981bd2b1357, type: 3}
+    parallelepipedIcon: {fileID: 21300000, guid: 7413ecd3835317c4fb549a9b2402df5c, type: 3}
+    capsuleIcon: {fileID: 21300000, guid: 6001b610a1ac80a41adf4224aa17ff58, type: 3}
 --- !u!114 &261197664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,8 +359,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.20754719, g: 0.18894626, b: 0.1909227, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -440,6 +427,10 @@ PrefabInstance:
     - target: {fileID: 1130631069760672555, guid: 3ab265b3581c01041958e644906ae261, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260044142998851512, guid: 3ab265b3581c01041958e644906ae261, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1305820761694882568, guid: 3ab265b3581c01041958e644906ae261, type: 3}
       propertyPath: m_AnchorMax.y
@@ -509,8 +500,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6255882588660092992, guid: 3ab265b3581c01041958e644906ae261, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7068598772241322403, guid: 3ab265b3581c01041958e644906ae261, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068598772241322403, guid: 3ab265b3581c01041958e644906ae261, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7437942901803870846, guid: 3ab265b3581c01041958e644906ae261, type: 3}

@@ -57,6 +57,7 @@ namespace Runtime.Logic
             currentPresenter.SetMaterial(_isWireframeMode ? wireframeMaterial : standardMaterial);
 
             _isWireframeMode = !_isWireframeMode;
+            currentPresenter.UpdateView();
         }
         
         public void RotateCurrentShape(Vector2 rotationInput, float rotationSpeed)

@@ -12,7 +12,7 @@ namespace Runtime.ShapeComponents.Impl.Prism
         {
             { EShapeParameter.Radius, new FloatParameter(EShapeParameter.Radius, 1f, 0.1f, 10f) },
             { EShapeParameter.Height, new FloatParameter(EShapeParameter.Height, 1f, 0.1f, 10f) },
-            { EShapeParameter.Sides, new IntParameter(EShapeParameter.Sides, 6, 3, 20) },
+            { EShapeParameter.Sides, new IntParameter(EShapeParameter.Sides, 6, 3, 50) },
             { EShapeParameter.Color, new ColorParameter(EShapeParameter.Color, Color.red) },
         })
         {

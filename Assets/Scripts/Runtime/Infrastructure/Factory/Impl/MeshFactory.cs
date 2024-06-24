@@ -75,18 +75,20 @@ namespace Runtime.Infrastructure.Factory.Impl
             }
 
             for (var lat = 0; lat < latitudeSegments; lat++)
-            for (var lon = 0; lon < longitudeSegments; lon++)
             {
-                var first = lat * (longitudeSegments + 1) + lon;
-                var second = first + longitudeSegments + 1;
+                for (var lon = 0; lon < longitudeSegments; lon++)
+                {
+                    var first = lat * (longitudeSegments + 1) + lon;
+                    var second = first + longitudeSegments + 1;
 
-                triangles.Add(first);
-                triangles.Add(second);
-                triangles.Add(first + 1);
+                    triangles.Add(first);
+                    triangles.Add(first + 1);
+                    triangles.Add(second);
 
-                triangles.Add(second);
-                triangles.Add(second + 1);
-                triangles.Add(first + 1);
+                    triangles.Add(second);
+                    triangles.Add(first + 1);
+                    triangles.Add(second + 1);
+                }
             }
 
             mesh.vertices = vertices.ToArray();
@@ -116,7 +118,6 @@ namespace Runtime.Infrastructure.Factory.Impl
             var tri = 0;
             var _2pi = Mathf.PI * 2f;
 
-            // Top Hemisphere
             for (var y = 0; y <= segments; y++)
             for (var x = 0; x <= segments; x++)
             {
@@ -132,7 +133,6 @@ namespace Runtime.Infrastructure.Factory.Impl
                 vert++;
             }
 
-            // Bottom Hemisphere
             for (var y = 0; y <= segments; y++)
             for (var x = 0; x <= segments; x++)
             {
@@ -148,7 +148,6 @@ namespace Runtime.Infrastructure.Factory.Impl
                 vert++;
             }
 
-            // Cylinder sides
             for (var i = 0; i <= segments; i++)
             {
                 var xSegment = i / (float)segments;
@@ -238,39 +237,36 @@ namespace Runtime.Infrastructure.Factory.Impl
             var vert = 0;
             var tri = 0;
 
-            // Bottom circle
             for (var i = 0; i < sides; i++)
             {
                 var angle = Mathf.Deg2Rad * i * angleStep;
                 vertices[vert] = new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
-                normals[vert] = Vector3.down; // нормали направлены вниз
+                normals[vert] = Vector3.down;
                 uvs[vert] = new Vector2(vertices[vert].x / (2 * radius) + 0.5f, vertices[vert].z / (2 * radius) + 0.5f);
                 vert++;
             }
 
-            vertices[vert] = Vector3.zero; // центр нижнего круга
-            normals[vert] = Vector3.down; // нормали направлены вниз
+            vertices[vert] = Vector3.zero; 
+            normals[vert] = Vector3.down; 
             uvs[vert] = new Vector2(0.5f, 0.5f);
             var bottomCenterIndex = vert;
             vert++;
 
-            // Top circle
             for (var i = 0; i < sides; i++)
             {
                 var angle = Mathf.Deg2Rad * i * angleStep;
                 vertices[vert] = new Vector3(Mathf.Cos(angle) * radius, height, Mathf.Sin(angle) * radius);
-                normals[vert] = Vector3.up; // нормали направлены вверх
+                normals[vert] = Vector3.up; 
                 uvs[vert] = new Vector2(vertices[vert].x / (2 * radius) + 0.5f, vertices[vert].z / (2 * radius) + 0.5f);
                 vert++;
             }
 
-            vertices[vert] = new Vector3(0, height, 0); // центр верхнего круга
-            normals[vert] = Vector3.up; // нормали направлены вверх
+            vertices[vert] = new Vector3(0, height, 0); 
+            normals[vert] = Vector3.up; 
             uvs[vert] = new Vector2(0.5f, 0.5f);
             var topCenterIndex = vert;
             vert++;
 
-            // Bottom triangles
             for (var i = 0; i < sides; i++)
             {
                 var next = (i + 1) % sides;
@@ -279,7 +275,6 @@ namespace Runtime.Infrastructure.Factory.Impl
                 triangles[tri++] = next;
             }
 
-            // Top triangles
             for (var i = 0; i < sides; i++)
             {
                 var next = (i + 1) % sides;
@@ -288,7 +283,6 @@ namespace Runtime.Infrastructure.Factory.Impl
                 triangles[tri++] = i + sides + 1;
             }
 
-            // Side triangles and normals
             for (var i = 0; i < sides; i++)
             {
                 var next = (i + 1) % sides;
@@ -296,7 +290,6 @@ namespace Runtime.Infrastructure.Factory.Impl
                 var currentTop = i + sides + 1;
                 var nextTop = next + sides + 1;
 
-                // Side triangles
                 triangles[tri++] = current;
                 triangles[tri++] = nextTop;
                 triangles[tri++] = next;
@@ -305,7 +298,6 @@ namespace Runtime.Infrastructure.Factory.Impl
                 triangles[tri++] = currentTop;
                 triangles[tri++] = nextTop;
 
-                // Normals for the side
                 var sideNormal = Vector3
                     .Cross(vertices[next] - vertices[current], vertices[nextTop] - vertices[current]).normalized;
                 normals[current] = sideNormal;

@@ -5,8 +5,8 @@ namespace Runtime.ShapeComponents
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public abstract class ShapeView : MonoBehaviour
     {
-        protected MeshRenderer meshRenderer;
-        protected MeshFilter meshFilter;
+        private MeshRenderer meshRenderer;
+        private MeshFilter meshFilter;
 
         protected virtual void Awake()
         {
