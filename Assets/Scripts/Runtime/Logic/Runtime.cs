@@ -7,5 +7,9 @@ namespace Runtime.Logic
 {
     public class Runtime : MonoBehaviour
     {
+        private void Awake()
+        {
+            
+        }
     }
 }
