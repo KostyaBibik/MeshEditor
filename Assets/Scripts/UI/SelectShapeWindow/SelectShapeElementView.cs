@@ -17,16 +17,16 @@ namespace UI.SelectShapeWindow
     
     public class SelectShapeElementView : UIElementView<SelectShapeElementModel>
     {
-        [AutoSetupField] private ButtonView button;
-        [AutoSetupField] private Image icon;
+        [AutoSetupField] private ButtonView _button;
+        [AutoSetupField] private Image _icon;
         
         protected override void UpdateView(SelectShapeElementModel model)
         {
-            icon.sprite = model.icon;
+            _icon.sprite = model.icon;
             
             var btnModel = new ButtonModel();
             btnModel.ClickCallback = model.onClickCallback;
-            button.InvokeUpdateView(btnModel);
+            _button.InvokeUpdateView(btnModel);
         }
     }
 }

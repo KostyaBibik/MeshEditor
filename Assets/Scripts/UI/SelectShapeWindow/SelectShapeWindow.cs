@@ -55,7 +55,7 @@ namespace UI.SelectShapeWindow
                 
                 elementModel.onClickCallback = parameter.onSelectCallback;
                 elementModel.icon = parameter.icon;
-                elementModel.type = elementModel.type;
+                elementModel.type = parameter.type;
                 
                 lineElement.InvokeUpdateView(elementModel);
                 lineElement.BeginShow();

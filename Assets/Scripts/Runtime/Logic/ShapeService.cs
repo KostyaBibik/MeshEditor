@@ -9,62 +9,64 @@ namespace Runtime.Logic
 {
     public class ShapeService : MonoBehaviour
     {
-        private GameObject _shapeGO;
-        private ShapePresenter currentPresenter;
-        public ShapePresenter CurrentShape => currentPresenter;
-
-        private Material standardMaterial;
-        private Material wireframeMaterial;
+        private GameObject _shapeGo;
+        private ShapePresenter _currentPresenter;
+        
+        private Material _standardMaterial;
+        private Material _wireframeMaterial;
+        
         private bool _isWireframeMode;
         
+        public ShapePresenter CurrentShape => _currentPresenter;
+
         private void Start()
         {
-            _shapeGO = new GameObject("Shape");
-            _shapeGO.AddComponent<MeshFilter>();
-            _shapeGO.AddComponent<MeshRenderer>();
+            _shapeGo = new GameObject("Shape");
+            _shapeGo.AddComponent<MeshFilter>();
+            _shapeGo.AddComponent<MeshRenderer>();
             
             var baseShader = Shader.Find("Standard");
             var wireframeShader = Shader.Find("Unlit/WireframeShader");
             
-            standardMaterial = new Material(baseShader);
-            wireframeMaterial = new Material(wireframeShader);
+            _standardMaterial = new Material(baseShader);
+            _wireframeMaterial = new Material(wireframeShader);
 
-            _shapeGO.transform.position = Vector3.zero;
+            _shapeGo.transform.position = Vector3.zero;
             SetShape(EShapeType.Parallelepiped);
             ChangeShaderMode();
         }
 
         public void SetShape(EShapeType type)
         {
-            if (currentPresenter != null && currentPresenter.View != null)
+            if (_currentPresenter != null && _currentPresenter.View != null)
             {
-                Destroy(currentPresenter.View);
+                Destroy(_currentPresenter.View);
             }
 
-            currentPresenter = ShapePresenterFactory.CreatePresenter(type, _shapeGO);
+            _currentPresenter = ShapePresenterFactory.CreatePresenter(type, _shapeGo);
 
             var state = new ParametersState();
             state.type = type;
-            state.parameters = currentPresenter.GetParameters();
+            state.parameters = _currentPresenter.GetParameters();
             StateManager.Instance.SetState(state);
             
-            currentPresenter.UpdateView();
-            currentPresenter.View.transform.rotation = Quaternion.identity;
+            _currentPresenter.UpdateView();
+            _currentPresenter.View.transform.rotation = Quaternion.identity;
         }
 
         public void ChangeShaderMode()
         {
-            currentPresenter.SetMaterial(_isWireframeMode ? wireframeMaterial : standardMaterial);
+            _currentPresenter.SetMaterial(_isWireframeMode ? _wireframeMaterial : _standardMaterial);
 
             _isWireframeMode = !_isWireframeMode;
-            currentPresenter.UpdateView();
+            _currentPresenter.UpdateView();
         }
         
         public void RotateCurrentShape(Vector2 rotationInput, float rotationSpeed)
         {
-            if (currentPresenter != null && currentPresenter.View != null)
+            if (_currentPresenter != null && _currentPresenter.View != null)
             {
-                var shapeTransform = currentPresenter.View.transform; 
+                var shapeTransform = _currentPresenter.View.transform; 
                 shapeTransform.Rotate(Vector3.up, rotationInput.x * rotationSpeed * Time.deltaTime, Space.World);
                 shapeTransform.Rotate(Vector3.right, -rotationInput.y * rotationSpeed * Time.deltaTime, Space.World);
             }

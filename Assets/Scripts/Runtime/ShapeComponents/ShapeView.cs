@@ -5,33 +5,33 @@ namespace Runtime.ShapeComponents
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public abstract class ShapeView : MonoBehaviour
     {
-        private MeshRenderer meshRenderer;
-        private MeshFilter meshFilter;
+        private MeshRenderer _meshRenderer;
+        private MeshFilter _meshFilter;
 
         protected virtual void Awake()
         {
-            meshRenderer = GetComponent<MeshRenderer>();
-            meshFilter = GetComponent<MeshFilter>();
+            _meshRenderer = GetComponent<MeshRenderer>();
+            _meshFilter = GetComponent<MeshFilter>();
         }
 
         public void SetMesh(Mesh mesh)
         {
-            meshFilter.mesh = mesh;
+            _meshFilter.mesh = mesh;
         }
 
         public void SetMaterial(Material material)
         {
-            if (meshRenderer != null)
+            if (_meshRenderer != null)
             {
-                meshRenderer.material = material;
+                _meshRenderer.material = material;
             }
         }
 
         public void SetColor(Color color)
         {
-            if (meshRenderer != null)
+            if (_meshRenderer != null)
             {
-                meshRenderer.material.color = color;
+                _meshRenderer.material.color = color;
             }
         }
     }

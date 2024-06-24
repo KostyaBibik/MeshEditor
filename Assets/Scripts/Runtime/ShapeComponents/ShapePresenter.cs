@@ -7,8 +7,8 @@ namespace Runtime.ShapeComponents
 {
     public abstract class ShapePresenter
     {
-        protected ShapeModel model;
-        protected ShapeView view;
+        protected readonly ShapeModel model;
+        protected readonly ShapeView view;
 
         public ShapeView View => view;
         
