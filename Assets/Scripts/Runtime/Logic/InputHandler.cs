@@ -5,12 +5,12 @@ namespace Runtime.Logic
 {
     public class InputHandler : MonoBehaviour
     {
-        private ShapeManager _shapeManager;
+        private ShapeService _shapeService;
         private bool _test;
         
         private void Awake()
         {
-            _shapeManager = GetComponent<ShapeManager>();
+            _shapeService = GetComponent<ShapeService>();
         }
 
         private void Update()
@@ -54,25 +54,25 @@ namespace Runtime.Logic
             }
             else if (Input.GetKeyDown(KeyCode.Q))
             {
-                _shapeManager.SetShape(EShapeType.Sphere);
+                _shapeService.SetShape(EShapeType.Sphere);
             }
             else if (Input.GetKeyDown(KeyCode.W))
             {
-                _shapeManager.SetShape(EShapeType.Prism);
+                _shapeService.SetShape(EShapeType.Prism);
             }
             else if (Input.GetKeyDown(KeyCode.E))
             {
-                _shapeManager.SetShape(EShapeType.Parallelepiped);
+                _shapeService.SetShape(EShapeType.Parallelepiped);
             }
             else if (Input.GetKeyDown(KeyCode.R))
             {
-                _shapeManager.SetShape(EShapeType.Capsule);
+                _shapeService.SetShape(EShapeType.Capsule);
             }
         }
 
         private void ChangeShapeParameter<T>(EShapeParameter parameter, T delta) where T : struct
         {
-            _shapeManager.CurrentShape.ChangeParameterValue(parameter, delta);
+            _shapeService.CurrentShape.ChangeParameterValue(parameter, delta);
         }
     }
 }

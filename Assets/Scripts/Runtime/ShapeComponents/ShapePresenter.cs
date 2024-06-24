@@ -1,4 +1,6 @@
-﻿using Runtime.Enums;
+﻿using System.Collections.Generic;
+using Runtime.Enums;
+using Runtime.ShapeComponents.Parameters;
 using UnityEngine;
 
 namespace Runtime.ShapeComponents
@@ -10,23 +12,28 @@ namespace Runtime.ShapeComponents
 
         public ShapeView View => view;
         
-        protected ShapePresenter(ShapeModel model, ShapeView view)
+        protected ShapePresenter(ShapeModel shapeModel, ShapeView shapeView)
         {
-            this.model = model;
-            this.view = view;
+            model = shapeModel;
+            view = shapeView;
         }
 
-        public void ChangeParameterValue<T>(EShapeParameter parameter, T delta) where T : struct
+        public void ChangeParameterValue<T>(EShapeParameter parameter, T value) where T : struct
         {
-            model.ChangeParameterValue(parameter, delta);
+            model.ChangeParameterValue(parameter, value);
             UpdateView();
         }
 
         public void SetColor(Color color)
         {
-            view.SetColor(color);
+            View.SetColor(color);
         }
 
         public abstract void UpdateView();
+
+        public virtual Dictionary<EShapeParameter, IShapeParameter> GetParameters()
+        {
+            return model.Parameters;
+        }
     }
 }

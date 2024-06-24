@@ -5,6 +5,7 @@ using Runtime.ShapeComponents.Impl;
 using Runtime.ShapeComponents.Impl.Capsule;
 using Runtime.ShapeComponents.Impl.Parallelepiped;
 using Runtime.ShapeComponents.Impl.Prism;
+using Runtime.ShapeComponents.Impl.Sphere;
 using UnityEngine;
 
 namespace Runtime.Infrastructure.Factory.Impl

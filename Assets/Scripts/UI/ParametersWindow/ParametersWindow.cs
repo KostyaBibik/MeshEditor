@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UISystem;
 
-namespace UI.RuntimeWindow
+namespace UI.ParametersWindow
 {
     public class ParametersWindow : UIWindow<ParameterWindowModel>
     {
@@ -43,7 +43,17 @@ namespace UI.RuntimeWindow
             {
                 var parameter = parameters[i];
                 var lineElement = _lines[i];
+                var elementModel = new ParameterElementModel();
                 
+                elementModel.name = parameter.name;
+                elementModel.value = parameter.value;
+                elementModel.minValue = parameter.minValue;
+                elementModel.maxValue = parameter.maxValue;
+                elementModel.onChangeSliderValue = parameter.onChangeValue;
+                elementModel.isWholeValue = parameter.isWholeValue;
+                
+                lineElement.InvokeUpdateView(elementModel);
+                lineElement.BeginShow();
             }
         }
     }

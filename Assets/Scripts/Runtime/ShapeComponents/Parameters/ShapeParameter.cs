@@ -6,6 +6,8 @@ namespace Runtime.ShapeComponents.Parameters
     {
         public EShapeParameter Type { get; private set; }
         public T Value { get; set; }
+        public T MaxValue { get; set; }
+        public T MinValue { get; set; }
 
         protected ShapeParameter(EShapeParameter type, T value)
         {

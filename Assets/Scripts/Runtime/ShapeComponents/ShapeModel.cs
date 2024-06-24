@@ -13,14 +13,14 @@ namespace Runtime.ShapeComponents
             Parameters = parameters;
         }
 
-        public void ChangeParameterValue<T>(EShapeParameter parameter, T delta) where T : struct
+        public void ChangeParameterValue<T>(EShapeParameter parameter, T value) where T : struct
         {
             if (!Parameters.TryGetValue(parameter, out var param)) 
                 return;
             
             if (param is IShapeParameter<T> shapeParam)
             {
-                shapeParam.SetValue(shapeParam.Add(delta));
+                shapeParam.SetValue(value);
             }
         }
 

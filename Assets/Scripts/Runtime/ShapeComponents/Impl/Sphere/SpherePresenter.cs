@@ -2,7 +2,7 @@
 using Runtime.Infrastructure.Factory.Impl;
 using UnityEngine;
 
-namespace Runtime.ShapeComponents.Impl
+namespace Runtime.ShapeComponents.Impl.Sphere
 {
     public class SpherePresenter : ShapePresenter
     {
@@ -18,7 +18,10 @@ namespace Runtime.ShapeComponents.Impl
             var latitudeSegments = model.GetParameterValue<int>(EShapeParameter.LatitudeSegments);
 
             var mesh = MeshFactory.CreateSphere(radius, longitudeSegments, latitudeSegments);
-            view.SetMesh(mesh);
+            View.SetMesh(mesh);
+            
+            var color = model.GetParameterValue<Color>(EShapeParameter.Color);
+            View.SetColor(color);
         }
     }
 }

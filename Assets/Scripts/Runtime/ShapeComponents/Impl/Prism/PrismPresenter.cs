@@ -1,5 +1,6 @@
 ﻿using Runtime.Enums;
 using Runtime.Infrastructure.Factory.Impl;
+using UnityEngine;
 
 namespace Runtime.ShapeComponents.Impl.Prism
 {
@@ -17,7 +18,10 @@ namespace Runtime.ShapeComponents.Impl.Prism
             var sides = model.GetParameterValue<int>(EShapeParameter.Sides);
             
             var mesh = MeshFactory.CreatePrism(radius, height, sides);
-            view.SetMesh(mesh);
+            View.SetMesh(mesh);
+            
+            var color = model.GetParameterValue<Color>(EShapeParameter.Color);
+            View.SetColor(color);
         }
     }
 }

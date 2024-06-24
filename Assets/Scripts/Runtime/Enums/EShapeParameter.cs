@@ -10,6 +10,6 @@
         LatitudeSegments,
         Segments,
         Sides,
+        Color,
     }
-
 }

@@ -1,11 +1,13 @@
-﻿using Runtime.Enums;
+﻿using GlobalState;
+using Runtime.Enums;
 using Runtime.Infrastructure.Factory.Impl;
 using Runtime.ShapeComponents;
+using Runtime.States;
 using UnityEngine;
 
 namespace Runtime.Logic
 {
-    public class ShapeManager : MonoBehaviour
+    public class ShapeService : MonoBehaviour
     {
         private GameObject _shapeGO;
         private ShapePresenter currentPresenter;
@@ -37,16 +39,26 @@ namespace Runtime.Logic
             {
                 Destroy(currentPresenter.View);
             }
-            
+
             currentPresenter = ShapePresenterFactory.CreatePresenter(type, _shapeGO);
 
+            var state = new ParametersState();
+            state.type = type;
+            state.parameters = currentPresenter.GetParameters();
+            StateManager.Instance.SetState(state);
+            
             currentPresenter.UpdateView();
+            currentPresenter.View.transform.rotation = Quaternion.identity;
         }
 
-
-        public void SetColor(Color newColor)
+        public void RotateCurrentShape(Vector2 rotationInput, float rotationSpeed)
         {
-            currentPresenter?.SetColor(newColor);
+            if (currentPresenter != null && currentPresenter.View != null)
+            {
+                var shapeTransform = currentPresenter.View.transform; 
+                shapeTransform.Rotate(Vector3.up, rotationInput.x * rotationSpeed * Time.deltaTime, Space.World);
+                shapeTransform.Rotate(Vector3.right, -rotationInput.y * rotationSpeed * Time.deltaTime, Space.World);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Runtime.Enums;
 using Runtime.Infrastructure.Factory.Impl;
+using UnityEngine;
 
 namespace Runtime.ShapeComponents.Impl.Capsule
 {
@@ -17,7 +18,10 @@ namespace Runtime.ShapeComponents.Impl.Capsule
             var segments = model.GetParameterValue<int>(EShapeParameter.Segments);
             
             var mesh = MeshFactory.CreateCapsule(radius, height, segments);
-            view.SetMesh(mesh);
+            View.SetMesh(mesh);
+            
+            var color = model.GetParameterValue<Color>(EShapeParameter.Color);
+            View.SetColor(color);
         }
     }
 }

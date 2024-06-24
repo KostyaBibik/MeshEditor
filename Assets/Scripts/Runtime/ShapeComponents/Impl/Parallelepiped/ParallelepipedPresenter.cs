@@ -1,5 +1,6 @@
 ﻿using Runtime.Enums;
 using Runtime.Infrastructure.Factory.Impl;
+using UnityEngine;
 
 namespace Runtime.ShapeComponents.Impl.Parallelepiped
 {
@@ -17,7 +18,10 @@ namespace Runtime.ShapeComponents.Impl.Parallelepiped
             var depth = (int)model.GetParameterValue<float>(EShapeParameter.Depth);
             
             var mesh = MeshFactory.CreateParallelepiped(width, height, depth);
-            view.SetMesh(mesh);
+            View.SetMesh(mesh);
+
+            var color = model.GetParameterValue<Color>(EShapeParameter.Color);
+            View.SetColor(color);
         }
     }
 }
